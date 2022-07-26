@@ -1,3 +1,4 @@
+console.log(/----------------------------Iteración #1: Arrows---------------------------------/)
 /**Iteración #1: Arrows**/
 /*Crea una arrow function que tenga dos parametros a y b y 
 que por defecto el valor de a = 10 y de b = 5. Haz que la función muestre 
@@ -32,7 +33,7 @@ const sum3 = (a, b) => {
 
 sum3(a, b);
 
-console.log(/---------------------------------------------------------------------/);
+console.log(/----------------------------teración #2: Destructuring---------------------------------/);
 /*---------------------------------------------------------------------*/
 /*Iteración #2: Destructuring*/
 
@@ -81,7 +82,7 @@ const [year1, year2, year3] = car.itv;
 console.log(nombre1, itv, year1, year2, year3);
 
 
-console.log(/---------------------------------------------------------------------/)
+console.log(/--------------------------Iteración #3: Spread Operator------------------------------/)
 /*---------------------------------------------------------------------*/
 
 /**Iteración #3: Spread Operator**/
@@ -122,7 +123,7 @@ newColors.splice(2,1);
 console.log(newColors);
 
 
-console.log(/---------------------------------------------------------------------/)
+console.log(/----------------------------Iteración #4: Map---------------------------------/)
 /*---------------------------------------------------------------------*/
 
 /*Iteración #4: Map*/
@@ -168,7 +169,7 @@ const citiesToGo = cities.map(cities => (cities.isVisited === true)? cities.name
 console.log(citiesToGo);
 
 
-console.log(/---------------------------------------------------------------------/);
+console.log(/----------------------------Iteración #5: Filter---------------------------------/);
 /*---------------------------------------------------------------------*/
 
 /*Iteración #5: Filter*/
@@ -238,6 +239,23 @@ const streamers2 = [
 	{name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}
 ];
 
+const ru = streamers2.filter((streamers2) => {
+	if (streamers2.name.includes('Ru')) {
+		return streamers2.name
+	} else {
+		return false;
+	};
+});
+console.log(ru)
+
+const i = streamers2.filter((streamers2) => {
+	if (streamers2.name.includes('i')) {
+		return streamers2.name
+	} else {
+		return false;
+	}
+});
+console.log(i);
 
 /*<!doctype html>
 <html lang="en">
@@ -278,7 +296,125 @@ const streamers3 = [
 </body>
 </html>*/
 
+console.log(/--------------------------------Iteración #6: Find-------------------------------------/);
+/*---------------------------------------------------------------------*/
+
+/*Iteración #6: Find*/
 
 
-// ARRAY = [] = CORCHETES [LISTAS DESORDENADAS]
-// OBJETOS = {} = LLAVES {LISTAS ORDENADAS}
+/*6.1 Dado el siguiente array, usa .find() para econtrar el número 100.*/
+const numbers = [32, 21, 63, 95, 100, 67, 43];
+
+const found = numbers.find(numbers => numbers > 95);
+console.log(found)
+
+
+/*6.2 Dado el siguiente array, usa .find() para econtrar la pelicula del año 2010.*/
+const movies = [
+	{title: 'Madagascar', stars: 4.5, date: 2015},
+	{title: 'Origen', stars: 5, date: 2010},
+	{title: 'Your Name', stars: 5, date: 2016}
+];
+
+const moviesFound = movies.find(movies => movies.date == 2010);
+console.log(moviesFound);
+
+/*6.3 Dado el siguiente javascript, usa .find() para econtrar el alien de nombre 
+'Cucushumushu' y la mutación 'Porompompero'. Una vez que los encuentres, usa 
+spread operator para fusionarlos teniendo en cuenta que el objeto de la mutación 
+lo queremos meter en la propiedad .mutation del objeto fusionado.*/
+const aliens = [
+	{name: 'Zalamero', planet: 'Eden', age: 4029},
+	{name: 'Paktu', planet: 'Andromeda', age: 32},
+	{name: 'Cucushumushu', planet: 'Marte', age: 503021}
+];
+const mutations = [
+	{name: 'Porompompero', description: 'Hace que el alien pueda adquirir la habilidad de tocar el tambor'},
+	{name: 'Fly me to the moon', description: 'Permite volar, solo y exclusivamente a la luna'},
+	{name: 'Andando que es gerundio', description: 'Invoca a un señor mayor como Personal Trainer'}
+];
+
+const alien1 = aliens.find(alien => alien.name == 'Cucushumushu');
+const mutation1 = mutations.find(mutation => mutation.name == 'Porompompero');
+
+//OJO!!!: de esta manera, anido un objeto dentro de otro
+const fusion = {...alien1, mutation: mutation1};
+console.log(fusion);
+
+/*const obj1 = { firstName: 'Foo', age: 22 };
+const obj2 = { lastName: 'Bar', gender: 'M' };
+
+const newObj = { ...obj1, ...obj2, planet: 'Earth' };
+
+console.log(newObj);*/
+
+
+console.log(/--------------------------------Iteración #7: Reduce-------------------------------------/)
+/*Iteración #7: Reduce*/
+/*7.1 Dado el siguiente array, haz una suma de todos las notas de los examenes de 
+los alumnos usando la función .reduce().*/
+
+const exams = [
+    {name: 'Yuyu Cabeza Crack', score: 5}, 
+    {name: 'Maria Aranda Jimenez', score: 1}, 
+    {name: 'Cristóbal Martínez Lorenzo', score: 6}, 
+    {name: 'Mercedez Regrera Brito', score: 7},
+    {name: 'Pamela Anderson', score: 3},
+    {name: 'Enrique Perez Lijó', score: 6},
+    {name: 'Pedro Benitez Pacheco', score: 8},
+    {name: 'Ayumi Hamasaki', score: 4},
+    {name: 'Robert Kiyosaki', score: 2},
+    {name: 'Keanu Reeves', score: 10}
+];
+
+const allNotes = exams.reduce((acc, exams) => acc + exams.score, 0);
+console.log(allNotes);
+
+/*7.2 Dado el mismo array, haz una suma de todos las notas de los examenes de los 
+alumnos que esten aprobados usando la función .reduce().*/
+const passed = exams.reduce((acc, exam) => {
+	if (exam.score >= 5) {
+		return acc + exam.score
+	}{
+		return acc
+	}
+},0);
+console.log(passed);
+
+
+/*7.3 Dado el mismo array, haz la media de las notas de todos los examenes .reduce().*/
+const notes = exams.map(note => note.score);
+const average = notes.reduce((acc, note) => {
+	return acc + note / notes.length
+},0)
+console.log(average)
+
+console.log(/--------------------------------Iteración #8: Bonus-------------------------------------/)
+/*Iteración #8: Bonus*/
+
+/*6.1 Dado el siguiente javascript filtra los videojuegos por genre = 'RPG' usando 
+.filter() y usa .reduce() para conseguir la media de sus .score. 
+La función .find() también podría ayudarte para el contrar el genero 'RPG' en el 
+array .genre.*/
+
+const videogames = [
+    {name: 'Final Fantasy VII', genre: ['RPG'], score: 9.5},
+    {name: 'Assasins Creed Valhala', genre: ['Aventura', 'RPG'], score: 4.5},
+    {name: 'The last of Us 2', genre: ['Acción', 'Aventura'], score: 9.8},
+    {name: 'Super Mario Bros', genre: ['Plataforma'], score: 8.5},
+    {name: 'Genshin Impact', genre: ['RPG', 'Aventura'], score: 7.5},
+    {name: 'Legend of Zelda: Breath of the wild', genre: ['RPG', 'La cosa más puto bonita que he visto nunca'], score: 10},
+]
+
+//1.- .filter() genre = RPG
+//2.- .reduce() to find average of .score
+//3.- Maybe use .fid()? instead of .filter()?
+
+const rpg = videogames.filter(videogame => videogame.genre.includes('RPG'))
+console.log(rpg)
+const rpgAverage = rpg.reduce((acc, score) => {
+	return acc + score.score / rpg.length
+},0)
+console.log(rpgAverage)
+
+console.log(/--------------------------------Level Completed! (...Almost xD)-------------------------------------/)
